@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <link rel="self" href="feed_url"/>
+ <id>yt:channel:id</id>
+ <yt:channelId>id</yt:channelId>
+ <title>channel title</title>
+ <link rel="alternate" href="channel_url"/>
+ <author>
+  <name>author name</name>
+  <uri>channel_url</uri>
+ </author>
+ <published>2019-01-04T10:00:00+00:00</published>
+ <entry>
+  <id>yt:video:id</id>
+  <yt:videoId>id</yt:videoId>
+  <yt:channelId>channel_id</yt:channelId>
+  <title>video title</title>
+  <link rel="alternate" href="video_url"/>
+  <author>
+   <name>author name</name>
+   <uri>channel_url</uri>
+  </author>
+  <published>2019-05-14T11:00:01+00:00</published>
+  <updated>2019-05-15T15:00:00+00:00</updated>
+  <media:group>
+   <media:title>video title</media:title>
+   <media:content url="flash_url" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="thumb_url" width="480" height="360"/>
+   <media:description>this is the video description
+it has two lines</media:description>
+   <media:community>
+    <media:starRating count="20000" average="4.97" min="1" max="5"/>
+    <media:statistics views="600000"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:id2</id>
+  <yt:videoId>id2</yt:videoId>
+  <yt:channelId>channel_id</yt:channelId>
+  <title>video title 2</title>
+  <link rel="alternate" href="video_url2"/>
+  <author>
+   <name>author name</name>
+   <uri>channel_url</uri>
+  </author>
+  <published>2019-05-15T11:00:01+00:00</published>
+  <updated>2019-05-16T15:00:00+00:00</updated>
+  <media:group>
+   <media:title>video title 2</media:title>
+   <media:content url="flash_url_2" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="thumb_url_2" width="480" height="360"/>
+   <media:description>this is the video description
+it also has two lines</media:description>
+   <media:community>
+    <media:starRating count="30000" average="4.97" min="1" max="5"/>
+    <media:statistics views="700000"/>
+   </media:community>
+  </media:group>
+ </entry>
+</feed>
