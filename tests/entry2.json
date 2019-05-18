@@ -1,0 +1,42 @@
+{
+    "id": "yt:video:id2",
+    "yt:videoId": "id2",
+    "yt:channelId": "channel_id",
+    "title": "video title 2",
+    "link": {
+        "@rel": "alternate",
+        "@href": "video_url2"
+    },
+    "author": {
+        "name": "author name",
+        "uri": "channel_url"
+    },
+    "published": "2019-05-15T11:00:01+00:00",
+    "updated": "2019-05-16T15:00:00+00:00",
+    "media:group": {
+        "media:title": "video title 2",
+        "media:content": {
+            "@url": "flash_url_2",
+            "@type": "application/x-shockwave-flash",
+            "@width": "640",
+            "@height": "390"
+        },
+        "media:thumbnail": {
+            "@url": "thumb_url_2",
+            "@width": "480",
+            "@height": "360"
+        },
+        "media:description": "this is the video description\nit also has two lines",
+        "media:community": {
+            "media:starRating": {
+                "@count": "30000",
+                "@average": "4.97",
+                "@min": "1",
+                "@max": "5"
+            },
+            "media:statistics": {
+                "@views": "700000"
+            }
+        }
+    }
+}

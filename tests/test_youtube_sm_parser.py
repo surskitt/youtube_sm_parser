@@ -4,18 +4,30 @@
 """Tests for `youtube_sm_parser` package."""
 
 import pytest
+import deepdiff
+import collections
 
 import os
+import xmltodict
+import json
 
 
 from youtube_sm_parser import youtube_sm_parser
 
 
-def mock_xml(fn):
+def rel_fn(fn):
     dir_name = os.path.dirname(os.path.realpath(__file__))
-    full_fn = os.path.join(dir_name, fn)
-    with open(full_fn) as f:
-        return f.read()
+    return os.path.join(dir_name, fn)
+
+
+def mock_xml(fn):
+    with open(rel_fn(fn)) as f:
+        return xmltodict.parse(f.read())
+
+
+def mock_json(fn):
+    with open(rel_fn(fn)) as f:
+        return json.load(f, object_pairs_hook=collections.OrderedDict)
 
 
 @pytest.fixture
@@ -28,14 +40,9 @@ def feed():
     return mock_xml('feed.xml')
 
 
-@pytest.fixture
-def entry1():
-    return mock_xml('entry1.xml')
-
-
-@pytest.fixture
-def entry1():
-    return mock_xml('entry2.xml')
+#  @pytest.fixture
+#  def entry1():
+#      return mock_json('entry1.json')
 
 
 def test_extract_feeds(subs_file):
@@ -46,7 +53,11 @@ def test_extract_feeds(subs_file):
 
 
 def test_get_entries(feed):
-    pass
+    expected = [mock_json(i) for i in ['entry1.json', 'entry2.json']]
+
+    entries = youtube_sm_parser.get_entries(feed)
+
+    assert deepdiff.DeepDiff(expected, entries) == {}
 
 
 def test_entry_to_dict():

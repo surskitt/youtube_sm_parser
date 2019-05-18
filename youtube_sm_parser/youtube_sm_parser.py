@@ -2,14 +2,19 @@
 
 """Main module."""
 
-import xml.etree.ElementTree
+import xmltodict
 
 
-def extract_feeds(subs_file):
-    x = xml.etree.ElementTree.fromstring(subs_file)
-    feeds = [i.get('xmlUrl') for i in x.findall('body/outline/outline')]
+def extract_feeds(opml):
+    feeds = [i['@xmlUrl'] for i in opml['opml']['body']['outline']['outline']]
 
     return feeds
+
+
+def get_entries(feed):
+    entries = feed['feed']['entry']
+
+    return entries
 
 
 def main():
