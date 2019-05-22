@@ -15,6 +15,18 @@ def get_entries(feed):
     return entries
 
 
+def entry_to_dict(entry):
+    entry_dict = {
+        'id': entry['yt:videoId'],
+        'title': entry['title'],
+        'link': entry['link']['@href'],
+        'uploader': entry['author']['name'],
+        'published': entry['published'],
+        'thumbnail': entry['media:group']['media:thumbnail']['@url']
+    }
+    return entry_dict
+
+
 def main():
     pass
 

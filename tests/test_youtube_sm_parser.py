@@ -40,6 +40,18 @@ def feed():
     return mock_xml('feed.xml')
 
 
+@pytest.fixture
+def entry_dict():
+    return {
+        'id': 'id',
+        'title': 'video title',
+        'link': 'video_url',
+        'uploader': 'author name',
+        'published': '2019-05-14T11:00:01+00:00',
+        'thumbnail': 'thumb_url'
+    }
+
+
 #  @pytest.fixture
 #  def entry1():
 #      return mock_json('entry1.json')
@@ -57,8 +69,11 @@ def test_get_entries(feed):
 
     entries = youtube_sm_parser.get_entries(feed)
 
-    assert deepdiff.DeepDiff(expected, entries) == {}
+    assert deepdiff.DeepDiff(entries, expected) == {}
 
 
-def test_entry_to_dict():
-    pass
+def test_entry_to_dict(entry_dict):
+    entry = mock_json('entry1.json')
+    expected = youtube_sm_parser.entry_to_dict(entry)
+
+    assert deepdiff.DeepDiff(entry_dict, expected) == {}
