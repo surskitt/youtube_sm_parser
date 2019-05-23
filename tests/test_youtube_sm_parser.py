@@ -77,3 +77,11 @@ def test_entry_to_dict(entry_dict):
     expected = youtube_sm_parser.entry_to_dict(entry)
 
     assert deepdiff.DeepDiff(entry_dict, expected) == {}
+
+
+def test_format_dict(entry_dict):
+    format_string = '{title},{link}'
+    expected = 'video title,video_url'
+    formatted = youtube_sm_parser.format_dict(entry_dict, format_string)
+
+    assert formatted == expected

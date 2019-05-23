@@ -27,6 +27,10 @@ def entry_to_dict(entry):
     return entry_dict
 
 
+def format_dict(d, format_string):
+    return format_string.format(**d)
+
+
 def main():
     pass
 
