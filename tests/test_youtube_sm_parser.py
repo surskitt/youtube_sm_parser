@@ -52,11 +52,6 @@ def entry_dict():
     }
 
 
-#  @pytest.fixture
-#  def entry1():
-#      return mock_json('entry1.json')
-
-
 def test_extract_feeds(subs_file):
     expected = ['test_chan_url', 'test_chan_url_2']
     parsed_urls = youtube_sm_parser.extract_feeds(subs_file)
