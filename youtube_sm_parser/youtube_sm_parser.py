@@ -2,7 +2,9 @@
 
 """Main module."""
 
+import sys
 import xmltodict
+from requests_futures.sessions import FuturesSession
 
 
 def extract_feeds(opml):
@@ -43,7 +45,16 @@ def feed_to_dicts(r, *args, **kwargs):
 
 
 def main():
-    pass
+    opml_fn = sys.argv[1]
+    with open(opml_fn) as f:
+        opml_dict = xmltodict.parse(f.read())
+    feeds = extract_feeds(opml_dict)
+
+    session = FuturesSession(max_workers=50)
+    futures = [session.get(f, hooks={'response': feed_to_dicts})
+               for f in feeds]
+    entry_lists = [f.result().data for f in futures]
+    entries = [i for s in entry_lists for i in s]
 
 
 if __name__ == '__main__':
