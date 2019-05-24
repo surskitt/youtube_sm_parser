@@ -10,7 +10,7 @@ def extract_feeds(opml):
 
 
 def get_entries(feed):
-    entries = feed['feed']['entry']
+    entries = feed['feed'].get('entry', [])
 
     return entries
 

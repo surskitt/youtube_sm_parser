@@ -67,6 +67,13 @@ def test_get_entries(feed):
     assert deepdiff.DeepDiff(entries, expected) == {}
 
 
+def test_get_entries_empty():
+    expected = []
+    entries = youtube_sm_parser.get_entries({'feed': {}})
+
+    assert entries == expected
+
+
 def test_entry_to_dict(entry_dict):
     entry = mock_json('entry1.json')
     expected = youtube_sm_parser.entry_to_dict(entry)
