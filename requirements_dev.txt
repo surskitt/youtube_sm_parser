@@ -1,5 +1,4 @@
-requests==2.22.0
-xmltodict==0.12.0
+-r requirements.txt
 
 pip==19.1.1
 bumpversion==0.5.3
