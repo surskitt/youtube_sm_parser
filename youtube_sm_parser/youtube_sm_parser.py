@@ -2,6 +2,8 @@
 
 """Main module."""
 
+import xmltodict
+
 
 def extract_feeds(opml):
     feeds = [i['@xmlUrl'] for i in opml['opml']['body']['outline']['outline']]
@@ -29,6 +31,15 @@ def entry_to_dict(entry):
 
 def format_dict(d, format_string):
     return format_string.format(**d)
+
+
+def feed_to_dicts(r, *args, **kwargs):
+    feed_dict = xmltodict.parse(r.content)
+    entries = get_entries(feed_dict)
+    entry_dicts = [entry_to_dict(e) for e in entries]
+    r.data = entry_dicts
+
+    return r
 
 
 def main():

@@ -25,6 +25,11 @@ def mock_xml(fn):
         return xmltodict.parse(f.read())
 
 
+def mock_xml_raw(fn):
+    with open(rel_fn(fn)) as f:
+        return f.read()
+
+
 def mock_json(fn):
     with open(rel_fn(fn)) as f:
         return json.load(f, object_pairs_hook=collections.OrderedDict)
@@ -38,6 +43,11 @@ def subs_file():
 @pytest.fixture
 def feed():
     return mock_xml('feed.xml')
+
+
+@pytest.fixture
+def feed_raw():
+    return mock_xml_raw('feed.xml')
 
 
 @pytest.fixture
@@ -87,3 +97,12 @@ def test_format_dict(entry_dict):
     formatted = youtube_sm_parser.format_dict(entry_dict, format_string)
 
     assert formatted == expected
+
+
+def test_feed_to_dicts(feed_raw, entry_dict):
+    class r():
+        content = feed_raw
+
+    entry_dicts = youtube_sm_parser.feed_to_dicts(r).data
+
+    assert entry_dicts[0] == entry_dict
