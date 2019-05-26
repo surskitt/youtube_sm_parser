@@ -11,9 +11,15 @@ import argparse
 def parse_args(args):
     desc = 'Output subscriptions using subscription_manager file'
     parser = argparse.ArgumentParser(description=desc)
+
     format_choices = ['json', 'lines', 'yaml']
-    parser.add_argument('--format', choices=format_choices, required=True)
-    parser.add_argument('--line_format', default='{title},{link}')
+    parser.add_argument('-f', '--format', choices=format_choices,
+                        required=True)
+
+    parser.add_argument('-l', '--line_format', default='{title},{link}')
+
+    default_input_fn = '~/.config/youtube_sm_parser/subscription_manager'
+    parser.add_argument('-i', '--input', default=default_input_fn)
 
     return parser.parse_args(args)
 
