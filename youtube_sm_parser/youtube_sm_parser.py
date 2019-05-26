@@ -11,7 +11,8 @@ import argparse
 def parse_args(args):
     desc = 'Output subscriptions using subscription_manager file'
     parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument('--format', choices=['json', 'lines', 'yaml'])
+    format_choices = ['json', 'lines', 'yaml']
+    parser.add_argument('--format', choices=format_choices, required=True)
 
     return parser.parse_args(args)
 
