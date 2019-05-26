@@ -117,3 +117,13 @@ def test_parse_args_format(f):
 def test_invalid_format():
     with pytest.raises(SystemExit):
         args = youtube_sm_parser.parse_args('--format invalid'.split())
+
+
+def test_line_format_valid():
+    args = youtube_sm_parser.parse_args('-l {title}'.split())
+    assert args.line_format == '{title}'
+
+
+def test_line_format_invalid():
+    with pytest.raises(SystemExit):
+        args = youtube_sm_parser.parse_args('-l {invalid}'.split())

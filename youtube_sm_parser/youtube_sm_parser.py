@@ -12,6 +12,16 @@ import yaml
 from requests_futures.sessions import FuturesSession
 
 
+def line_validator(line_format):
+    line_keys = ['id', 'title', 'link', 'uploader', 'published', 'thumbnail']
+    try:
+        line_format.format(**{k: 'test' for k in line_keys})
+    except KeyError:
+        error_msg = f'{line_format} is not a valid format'
+        raise argparse.ArgumentTypeError(error_msg)
+    return line_format
+
+
 def parse_args(args):
     desc = 'Output subscriptions using subscription_manager file'
     parser = argparse.ArgumentParser(description=desc)
@@ -20,7 +30,8 @@ def parse_args(args):
     parser.add_argument('-f', '--format', choices=format_choices,
                         default='lines')
 
-    parser.add_argument('-l', '--line_format', default='{title},{link}')
+    parser.add_argument('-l', '--line_format', default='{title},{link}',
+                        type=line_validator)
 
     default_input_fn = '~/.config/youtube_sm_parser/subscription_manager'
     parser.add_argument('-i', '--input', default=default_input_fn)
@@ -78,7 +89,8 @@ def main():
     futures = [session.get(f, hooks={'response': feed_to_dicts})
                for f in feeds]
     entry_lists = [f.result().data for f in futures]
-    entries = [i for s in entry_lists for i in s]
+    entries = sorted([i for s in entry_lists for i in s],
+                     key=lambda x: x['published'], reverse=True)
 
     if args.format == 'json':
         output = json.dumps(entries, indent=4)
