@@ -122,4 +122,3 @@ def test_invalid_format():
 def test_no_format():
     with pytest.raises(SystemExit) as e:
         args = youtube_sm_parser.parse_args([])
-    assert 'the following arguments are requred: --format'
