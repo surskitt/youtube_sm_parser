@@ -27,10 +27,30 @@ Output youtube subscriptions using subscription_manager file
 * Documentation: https://youtube-sm-parser.readthedocs.io.
 
 
+Installation
+------------
+
+youtube-sm-parser can be installed using pip:
+    
+    pip install youtube_sm_parser
+
+Also available on the AUR_
+
+.. _AUR: https://aur.archlinux.org/python-youtube-sm-parser
+
+Usage
+-----
+
+Once installed, run using the command `youtube-sm-parser`. Options can be discovered using the `-h` option.
+
 Features
 --------
 
-* TODO
+* Return subscriptions using opml file exported from youtube
+* Output in multiple formats
+    * json
+    * yaml
+    * custom line format
 
 Credits
 -------

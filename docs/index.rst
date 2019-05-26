@@ -1,5 +1,5 @@
 Welcome to youtube_sm_parser's documentation!
-======================================
+=============================================
 
 .. toctree::
    :maxdepth: 2
