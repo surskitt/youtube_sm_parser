@@ -5,6 +5,15 @@
 import sys
 import xmltodict
 from requests_futures.sessions import FuturesSession
+import argparse
+
+
+def parse_args(args):
+    desc = 'Output subscriptions using subscription_manager file'
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('--format', choices=['json', 'lines', 'yaml'])
+
+    return parser.parse_args(args)
 
 
 def extract_feeds(opml):

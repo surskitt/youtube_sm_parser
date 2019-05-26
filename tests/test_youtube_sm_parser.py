@@ -106,3 +106,14 @@ def test_feed_to_dicts(feed_raw, entry_dict):
     entry_dicts = youtube_sm_parser.feed_to_dicts(r).data
 
     assert entry_dicts[0] == entry_dict
+
+
+@pytest.mark.parametrize('f', ['json', 'lines', 'yaml'])
+def test_parse_args_format(f):
+    args = youtube_sm_parser.parse_args(['--format', f])
+    assert args.format == f
+
+
+def test_invalid_format():
+    with pytest.raises(SystemExit):
+        args = youtube_sm_parser.parse_args('--format invalid'.split())
