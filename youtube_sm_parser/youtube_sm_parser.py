@@ -101,7 +101,3 @@ def main():
         output = yaml.dump(entries)
 
     print(output)
-
-
-if __name__ == '__main__':
-    main()
