@@ -36,7 +36,7 @@ youtube-sm-parser can be installed using pip:
 
 Also available on the AUR_
 
-.. _AUR: https://aur.archlinux.org/python-youtube-sm-parser
+.. _AUR: https://aur.archlinux.org/packages/python-youtube-sm-parser/
 
 Usage
 -----
