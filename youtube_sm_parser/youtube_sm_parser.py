@@ -13,6 +13,7 @@ def parse_args(args):
     parser = argparse.ArgumentParser(description=desc)
     format_choices = ['json', 'lines', 'yaml']
     parser.add_argument('--format', choices=format_choices, required=True)
+    parser.add_argument('--line_format', default='{title},{link}')
 
     return parser.parse_args(args)
 
