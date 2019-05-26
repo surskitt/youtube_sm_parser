@@ -117,8 +117,3 @@ def test_parse_args_format(f):
 def test_invalid_format():
     with pytest.raises(SystemExit):
         args = youtube_sm_parser.parse_args('--format invalid'.split())
-
-
-def test_no_format():
-    with pytest.raises(SystemExit) as e:
-        args = youtube_sm_parser.parse_args([])

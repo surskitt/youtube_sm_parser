@@ -14,7 +14,7 @@ def parse_args(args):
 
     format_choices = ['json', 'lines', 'yaml']
     parser.add_argument('-f', '--format', choices=format_choices,
-                        required=True)
+                        default='lines', required=True)
 
     parser.add_argument('-l', '--line_format', default='{title},{link}')
 
