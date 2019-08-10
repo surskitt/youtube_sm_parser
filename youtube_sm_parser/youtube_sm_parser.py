@@ -78,6 +78,16 @@ def feed_to_dicts(r, *args, **kwargs):
     return r
 
 
+def get_output(entries, out_format, line_format=None):
+    if out_format == 'json':
+        return json.dumps(entries, indent=4)
+    elif out_format == 'lines':
+        return '\n'.join(format_dict(line, line_format)
+                         for line in entries)
+    elif out_format == 'yaml':
+        return yaml.dump(entries)
+
+
 def main():
     args = parse_args(sys.argv[1:])
 
@@ -92,12 +102,6 @@ def main():
     entries = sorted([i for s in entry_lists for i in s],
                      key=lambda x: x['published'], reverse=True)
 
-    if args.format == 'json':
-        output = json.dumps(entries, indent=4)
-    elif args.format == 'lines':
-        output = '\n'.join(format_dict(line, args.line_format)
-                           for line in entries)
-    elif args.format == 'yaml':
-        output = yaml.dump(entries)
+    output = get_output(entries, args.format, args.line_format)
 
     print(output)

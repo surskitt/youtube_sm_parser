@@ -127,3 +127,15 @@ def test_line_format_valid():
 def test_line_format_invalid():
     with pytest.raises(SystemExit):
         args = youtube_sm_parser.parse_args('-l {invalid}'.split())
+
+
+@pytest.mark.parametrize('out_format, expected, line_format', [
+    ['json', '[\n    {\n        "a": "b"\n    }\n]', None],
+    ['lines', 'b', '{a}'],
+    ['yaml', '- a: b\n', None]
+])
+def test_get_output(out_format, expected, line_format):
+    entries = [{'a': 'b'}]
+
+    output = youtube_sm_parser.get_output(entries, out_format, line_format)
+    assert expected == output
