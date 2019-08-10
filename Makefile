@@ -63,7 +63,7 @@ coverage: ## check code coverage quickly with the default Python
 	coverage run --source youtube_sm_parser -m pytest
 	coverage report -m
 	coverage html
-	$(BROWSER) htmlcov/index.html
+	# $(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/youtube_sm_parser.rst
