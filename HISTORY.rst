@@ -2,6 +2,11 @@
 History
 =======
 
+0.1.2 (2019-08-12)
+------------------
+
+* Move subscription downloading and outputting to separate functions
+
 0.1.1 (2019-07-27)
 ------------------
 
