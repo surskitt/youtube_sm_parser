@@ -78,6 +78,16 @@ def feed_to_dicts(r, *args, **kwargs):
     return r
 
 
+def get_subscriptions(feeds, workers):
+    session = FuturesSession(max_workers=workers)
+    futures = [session.get(f, hooks={'response': feed_to_dicts})
+               for f in feeds]
+    entry_lists = [f.result().data for f in futures]
+    subscriptions = sorted([i for s in entry_lists for i in s],
+                           key=lambda x: x['published'], reverse=True)
+    return subscriptions
+
+
 def get_output(entries, out_format, line_format=None):
     if out_format == 'json':
         return json.dumps(entries, indent=4)
@@ -95,13 +105,7 @@ def main():
         opml_dict = xmltodict.parse(f.read())
     feeds = extract_feeds(opml_dict)
 
-    session = FuturesSession(max_workers=args.workers)
-    futures = [session.get(f, hooks={'response': feed_to_dicts})
-               for f in feeds]
-    entry_lists = [f.result().data for f in futures]
-    entries = sorted([i for s in entry_lists for i in s],
-                     key=lambda x: x['published'], reverse=True)
-
+    entries = get_subscriptions(feeds, args.workers)
     output = get_output(entries, args.format, args.line_format)
 
     print(output)

@@ -4,6 +4,7 @@
 """Tests for `youtube_sm_parser` package."""
 
 import pytest
+import unittest.mock
 import deepdiff
 import collections
 
@@ -127,6 +128,13 @@ def test_line_format_valid():
 def test_line_format_invalid():
     with pytest.raises(SystemExit):
         args = youtube_sm_parser.parse_args('-l {invalid}'.split())
+
+
+@unittest.mock.patch('youtube_sm_parser.youtube_sm_parser.FuturesSession')
+def test_get_subscriptions(mock_fs, feed):
+    mock_fs.return_value.get.return_value.content = feed
+
+    subs = youtube_sm_parser.get_subscriptions(['blah'], 10)
 
 
 @pytest.mark.parametrize('out_format, expected, line_format', [
