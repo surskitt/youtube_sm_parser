@@ -54,14 +54,17 @@ def get_entries(feed):
 
 
 def entry_to_dict(entry):
-    entry_dict = {
-        'id': entry['yt:videoId'],
-        'title': entry['title'],
-        'link': entry['link']['@href'],
-        'uploader': entry['author']['name'],
-        'published': entry['published'],
-        'thumbnail': entry['media:group']['media:thumbnail']['@url']
-    }
+    try:
+        entry_dict = {
+            'id': entry['yt:videoId'],
+            'title': entry['title'],
+            'link': entry['link']['@href'],
+            'uploader': entry['author']['name'],
+            'published': entry['published'],
+            'thumbnail': entry['media:group']['media:thumbnail']['@url']
+        }
+    except TypeError:
+        return None
     return entry_dict
 
 
@@ -73,7 +76,7 @@ def feed_to_dicts(r, *args, **kwargs):
     feed_dict = xmltodict.parse(r.content)
     entries = get_entries(feed_dict)
     entry_dicts = [entry_to_dict(e) for e in entries]
-    r.data = entry_dicts
+    r.data = [ed for ed in entry_dicts if ed]
 
     return r
 
